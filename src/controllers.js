@@ -42,8 +42,13 @@ export default {
         return res.json(response)
     },
 
+    async getExams(req, res) {
+        const exams = await ExamModel.find({}, {participants: 0, question: 0}).lean()
+        res.json({data: exams})
+    },
+
     async getExamInfoByIdNoCaching(req, res) {
-        const response = {type: 'no-caching'}
+        const response = { type: 'with-caching', from: 'MongoDB' }
 
         // Mengambil parameter.
         const examId = req.params.examId
@@ -112,7 +117,7 @@ export default {
         test.question.list = questions
 
         // Cache data ke dalam redis.
-        redis.set(cacheKey, JSON.stringify(test), {EX: 5})
+        await redis.set(cacheKey, JSON.stringify(test), {EX: 5})
 
         // Kembalikan respon.
         response.data = test

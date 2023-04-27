@@ -1,16 +1,16 @@
 import axios from 'axios'
 import dotenv from 'dotenv'
-import random from "random"
+import random from 'random'
 
 dotenv.config()
 
-describe("Mengambil 20 data peserta menggunakan username:", () => {
+describe("[INDEX] Mengambil 20 data peserta menggunakan username:", () => {
     const port = process.env.PORT || 8000
     const baseURL = `http://localhost:${port}`
     const usernames = []
 
     beforeAll(() => {
-        // Generate random 15 username.
+        // Generate random 15 username terdaftar.
         for (let i = 0; i < 15; i++) {
            const indexRandom = random.int(0, 2_500_000)
            usernames.push(`U-${indexRandom}`)
@@ -25,7 +25,6 @@ describe("Mengambil 20 data peserta menggunakan username:", () => {
         const promises = []
         usernames.forEach(username => {
             const url = `${baseURL}/api/participants/${username}/no-index`
-            console.log(url)
             promises.push(axios.get(url))
         })
         await Promise.all(promises).catch(() => {})
