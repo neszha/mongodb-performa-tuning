@@ -1,5 +1,6 @@
 import cors from 'cors'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import express from 'express'
 import { createServer } from 'http'
 import './database/index.js'
@@ -12,6 +13,7 @@ const httpServer = createServer(app)
 
 /** Middlewhare express in main level. */
 app.use(cors())
+app.use(morgan('tiny'))
 
 /** Setup routes middlewhare express. */
 app.use('/', routes)
