@@ -6,6 +6,7 @@ import ManagerModel from './manager.model.js'
 import SettingModel from './setting.model.js'
 import QuestionModel from './question.model.js'
 import ParticipantModel from './participant.model.js'
+import NoIndexParticipantModel from './participant-no-index.model.js'
 
 export {
     ExamModel,
@@ -16,6 +17,7 @@ export {
     SettingModel,
     QuestionModel,
     ParticipantModel,
+    NoIndexParticipantModel
 }
 
 export default 'Models'
