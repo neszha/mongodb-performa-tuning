@@ -3,10 +3,12 @@ import controllers from './controllers.js'
 
 const route = Router()
 
-/** API mencari data peserta: no-index */
-route.get('/api/participants/:username/no-index', controllers.getParticipantByUsernameNoIndex)
+/** API: Megambil data peserta menggunakan username. */
+route.get('/api/participants/:username/no-index', controllers.getParticipantByUsernameNoIndex) // Tanpa index.
+route.get('/api/participants/:username/with-index', controllers.getParticipantByUsernameWithIndex) // Menggunakan index.
 
-/** API mencari data peserta: with-index */
-route.get('/api/participants/:username/with-index', controllers.getParticipantByUsernameWithIndex)
+/** API: Mengambil data tes lengkap. */
+route.get('/api/exams/:examId/no-caching', controllers.getExamInfoByIdNoCaching) // Tanpa caching.
+route.get('/api/exams/:examId/with-caching', controllers.getExamInfoByIdWithCaching) // Menggunakan caching.
 
 export default route
