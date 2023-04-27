@@ -10,19 +10,22 @@ describe("Mengambil 20 data peserta menggunakan username:", () => {
     const usernames = []
 
     beforeAll(() => {
-        // Generate random 19 username.
-        for (let i = 0; i < 19; i++) {
+        // Generate random 15 username.
+        for (let i = 0; i < 15; i++) {
            const indexRandom = random.int(0, 2_500_000)
            usernames.push(`U-${indexRandom}`)
         }
-        // Menambahkan 1 username yang tidak terdaftar.
-        usernames.push('no-username')
+        // Menambahkan 5 username yang tidak terdaftar.
+        for (let i = 0; i < 5; i++) {
+            usernames.push(`no-username-${i}`)
+        }
     })
 
     test("Username tidak menggunakan index.", async () => {
         const promises = []
         usernames.forEach(username => {
             const url = `${baseURL}/api/participants/${username}/no-index`
+            console.log(url)
             promises.push(axios.get(url))
         })
         await Promise.all(promises).catch(() => {})
