@@ -3,10 +3,10 @@ import dotenv from 'dotenv'
 import random from 'random'
 
 dotenv.config()
+const port = process.env.PORT || 8000
+const baseURL = `http://localhost:${port}`
 
 describe("[CACHING] Mengambil 100 kali data tes menggunakan ID yang sama:", () => {
-    const port = process.env.PORT || 8000
-    const baseURL = `http://localhost:${port}`
     const loopTotal = 100
     let examId = ''
 
@@ -39,8 +39,6 @@ describe("[CACHING] Mengambil 100 kali data tes menggunakan ID yang sama:", () =
 })
 
 describe("[CACHING] Mengambil 100 kali data tes menggunakan ID acak:", () => {
-    const port = process.env.PORT || 8000
-    const baseURL = `http://localhost:${port}`
     const loopTotal = 100
     let examIds = []
 

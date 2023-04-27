@@ -1,4 +1,4 @@
-import { QuestionModel } from "./database/models/index.js"
+import { ClassModel, CompoundIndexParticipantModel, QuestionModel, RoomModel } from "./database/models/index.js"
 import { NoIndexParticipantModel, ParticipantModel, ExamModel, ManagerModel } from "./database/models/index.js"
 import redis from "./database/redis.db.js"
 
@@ -6,6 +6,18 @@ export default {
     /**
      * Method: GET
      */
+    async getExams(req, res) {
+        const exams = await ExamModel.find({}, {participants: 0, question: 0}).lean()
+        res.json({data: exams})
+    },
+
+    async getClassAndRoom(req, res) {
+        const response = {classes: [], rooms: []}
+        response.classes = await ClassModel.find().lean()
+        response.rooms = await RoomModel.find().lean()
+        return res.json(response)
+    },
+
     async getParticipantByUsernameNoIndex(req, res) {
         const response = {type: 'no-index'}
 
@@ -42,9 +54,48 @@ export default {
         return res.json(response)
     },
 
-    async getExams(req, res) {
-        const exams = await ExamModel.find({}, {participants: 0, question: 0}).lean()
-        res.json({data: exams})
+    async getParticipantByClassAndRoomWithIndex(req, res) {
+        const response = {type: 'with-index'}
+
+        // Mengambil parameters.
+        const {classId, roomId} = req.query
+        if(!classId || !roomId) {
+            response.msg = 'Parameter tidak lengkap!'
+            return res.json(response)
+        }
+
+        // Mencari data dari collection perticipants.
+        const participants = await ParticipantModel.find({
+            $and: [
+                {classId}, {roomId}
+            ]
+        }).limit(100).lean()
+
+        // Kambalikan respon.
+        response.data = participants
+        return res.json(response)
+    },
+
+    async getParticipantByClassAndRoomWithCompoundIndex(req, res) {
+        const response = {type: 'with-index'}
+
+        // Mengambil parameters.
+        const {classId, roomId} = req.query
+        if(!classId || !roomId) {
+            response.msg = 'Parameter tidak lengkap!'
+            return res.json(response)
+        }
+
+        // Mencari data dari collection perticipants.
+        const participants = await CompoundIndexParticipantModel.find({
+            $and: [
+                {classId}, {roomId}
+            ]
+        }).limit(100).lean()
+
+        // Kambalikan respon.
+        response.data = participants
+        return res.json(response)
     },
 
     async getExamInfoByIdNoCaching(req, res) {
