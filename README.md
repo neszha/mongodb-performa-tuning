@@ -1,4 +1,4 @@
-# MongoDB Performa Tunning
+# MongoDB Performa Tuning
 
 Performa tuning MongoDB menggunakan indexing dan caching adalah salah satu cara untuk meningkatkan kinerja database dan mengoptimalkan aplikasi yang menggunakan MongoDB sebagai backend. Dalam hal ini, indexing dan caching adalah dua teknik yang sangat penting untuk meningkatkan performa MongoDB.
 
@@ -13,13 +13,13 @@ Adapun software dan tools yang dibutuhkan yaitu:
 - <a href="https://github.com/tporadowski/redis/releases/download/v5.0.14.1/Redis-x64-5.0.14.1.msi">Redis for Windows</a>
 - <a href="https://www.mongodb.com/try/download/community">MongoDB Server & MongoDB Compass</a>
 - <a href="https://www.mongodb.com/try/download/database-tools">MongoDBCommand Line Database Tools</a>
-- <a href="db-tunning.mongo-data.rar">MongoDB Data for Test</a>
+- <a href="db-tuning.mongo-data.rar">MongoDB Data for Test</a>
 
 # Instalasi
 
 Adapun proses instalasi yang harus dilakukan:
 - Lakukan instalasi NodeJS, Redis, MongoDB, dan MongoDB Tools.
-- Lakukan import data 'db-tunning.mongo-data.rar' menggunakan `mongorestore`.
+- Lakukan import data 'db-tuning.mongo-data.rar' menggunakan `mongorestore`.
 - Buka project dan siapkan file `.env`
 - Lakukan instalasi "dependencies" menggunakan perintah:
 ```
