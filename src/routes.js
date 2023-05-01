@@ -3,7 +3,7 @@ import controllers from './controllers.js'
 
 const route = Router()
 
-/** API: Megambil data peserta menggunakan username. */
+/** API: Megambil data peserta. */
 route.get('/api/participants/search/with-index', controllers.getParticipantByClassAndRoomWithIndex) // Menggunakan index terpisah.
 route.get('/api/participants/search/with-compound-index', controllers.getParticipantByClassAndRoomWithCompoundIndex) // Menggunakan compound index.
 route.get('/api/participants/:username/no-index', controllers.getParticipantByUsernameNoIndex) // Tanpa index.
