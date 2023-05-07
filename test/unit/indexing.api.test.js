@@ -1,6 +1,5 @@
 import axios from 'axios'
 import dotenv from 'dotenv'
-import { query } from 'express'
 import random from 'random'
 
 dotenv.config()
